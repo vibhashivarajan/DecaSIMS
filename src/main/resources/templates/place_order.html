@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DECA Store Inventory Management System</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link th:href="@{/styles/main.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<header th:insert="top-navigation-bar :: navbar-content"> </header>
+	<br>
+	<br>
+
+	<div class="container">
+
+		<div class="bg-light clearfix">
+			<h1>
+				<div class="float-left"></div>
+				<div class="float-right" th:if="${userCartContent != null}">
+					<div class="d-flex">
+						<div class="d-inline-block">Items in Cart:&nbsp;</div>
+						<div class="d-inline-block"
+							th:text=${#lists.size(userCartContent)}></div>
+					</div>
+				</div>
+			</h1>
+		</div>
+
+
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<!-- <th> Id</th>  -->
+					<th>SKU</th>
+					<th>Product Name</th>
+					<th>Description</th>
+					<th>Picture</th>
+					<th>Price (USD)</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="catalogItem: ${catalogItems}">
+					<td th:text="${catalogItem.sku}"></td>
+					<td th:text="${catalogItem.productName}"></td>
+					<td th:text="${catalogItem.ProductDesc}"></td>
+					<td><img
+						th:src="@{/images/{image}(image=${catalogItem.itemPhotoName})}"
+						class="rounded img-fluid thumbnail"></td>
+					<td th:text="${catalogItem.price}"></td>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<div class="box-footer">
+							<div class="float-left">Order Total: $<span th:text="${totalPrice}" /></div>
+							<div class="float-right">
+								<form th:action="@{/placeorder}" method="POST">							
+									<button type="submit" class="btn btn-primary">Place Order</button>
+								</form>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
+
+
+
+

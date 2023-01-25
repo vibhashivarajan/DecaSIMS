@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DECA Store Inventory Management System</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<header th:insert="top-navigation-bar :: navbar-content"> </header>
+	<br>
+	<br>
+	<div class = "container">
+		<div class = "row">
+			<div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class = "text-center"> Update Catalog Item </h1>
+				<div class = "card-body">
+					<form th:action="@{/inventory_admin/{id} (id=${catalogItem.productId})}" th:object = "${catalogItem}" method="POST">
+									<div class ="form-group">
+							<label>SKU</label>
+							<input
+							type = "text"
+							name = "sku"
+							th:field = "*{sku}"
+							class = "form-control"
+							placeholder="Enter Unique SKU" 
+							/>
+						</div>
+						
+						<div class ="form-group">
+							<label>Product Name</label>
+							<input
+							type = "text"
+							name = "productName"
+							th:field = "*{productName}"
+							class = "form-control"
+							placeholder="Enter Product Name" 
+							/>
+						</div>
+						
+						<div class ="form-group">
+							<label>Product Description</label>
+							<input
+							type = "text"
+							name = "productDesc"
+							th:field = "*{productDesc}"
+							class = "form-control"
+							placeholder="Enter Product Description" 
+							/>
+						</div>						
+												
+						<div class ="form-group">
+							<label>Price</label>
+							<input
+							type = "text"
+							name = "price"
+							th:field = "*{price}"
+							class = "form-control"
+							placeholder="Enter Product Price" 
+							/>
+						</div>
+						
+						<div class ="form-group">
+							<label>Quantity Available</label>
+							<input
+							type = "text"
+							name = "qtyInHand"
+							th:field = "*{qtyInHand}"
+							class = "form-control"
+							placeholder="Enter Quantity Available" 
+							/>
+						</div>
+						
+						<div class ="form-group">
+							<label>Item Photo Name</label>
+							<input
+							type = "text"
+							name = "itemPhotoName"
+							th:field = "*{itemPhotoName}"
+							class = "form-control"
+							placeholder="Enter Item Photo" 
+							/>
+						</div>
+						
+						<div class = "box-footer">
+							<button type="submit" class = "btn btn-primary">
+								Submit
+							</button>
+						</div>
+					</form>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

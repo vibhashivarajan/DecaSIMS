@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DECA Store Inventory Management System</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link th:href="@{/styles/main.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<header th:insert="top-navigation-bar :: navbar-content"> </header>
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<h1>Store Items List</h1>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/inventory_admin/new}" class="btn btn-primary btn-sm mb-3">
+					Add Item</a>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<!-- <th> Id</th>  -->
+					<th>SKU</th>
+					<th>Product Name</th>
+					<th>Description</th>
+					<th>Price (USD)</th>
+					<th>Available Quantity</th>
+					<th>Picture File Name</th>
+					<th>Updated On</th>
+					<th>Action</th>					
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="catalogItem: ${catalogItems}">
+					<td th:text="${catalogItem.sku}"></td>
+					<td th:text="${catalogItem.productName}"></td>
+					<td th:text="${catalogItem.ProductDesc}"></td>
+					<td th:text="${catalogItem.price}"></td>
+					<td th:text="${catalogItem.qtyInHand}"></td>
+					<td><img th:src="@{./images/{image}(image=${catalogItem.itemPhotoName})}" class="rounded img-fluid thumbnail"></td>
+					<td><span th:text="${#dates.format(catalogItem.lastUpdateDate, 'dd-MMM-yyyy HH:mm')}">No date found</span></td>
+					<td><a
+						th:href="@{/inventory_admin/edit/{id}(id=${catalogItem.productId})}"
+						class="btn btn-primary">Update</a> <a
+						th:href="@{/inventory_admin/{id}(id=${catalogItem.productId})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
+
+

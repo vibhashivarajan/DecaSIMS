@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DECA Store Inventory Management System</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link th:href="@{/styles/main.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<header th:insert="top-navigation-bar :: navbar-content"> </header>
+	<br>
+	<br>
+
+	<div class="container">
+
+		<div class="bg-light clearfix">
+			<h1>
+				<div class="float-center">Order No. <span th:text="${savedOrder.orderId}"/> placed successfully!</div>
+				<div class="float-center">Order details sent to email "<span th:text="${userEmail}"/>"</div>
+			</h1>
+		</div>
+		
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<!-- <th> Id</th>  -->
+					<th>Order Id</th>
+					<th>Date</th>
+					<th>Amount</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="order: ${allOrders}">
+					<td th:text="${order.orderId}"></td>
+					<td th:text="${order.lastUpdateDate}"></td>
+					<td th:text="${order.totalPrice}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
+
+
