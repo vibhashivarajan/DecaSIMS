@@ -154,7 +154,7 @@ public class User {
 	}
 
 	/**
-	 * To string.
+	 * To string: returns string representation of this object
 	 *
 	 * @return the string
 	 */
