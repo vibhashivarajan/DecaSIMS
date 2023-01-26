@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
  * indicates spring managed bean.
  *
  */
-
- */
 @Service
 public class OrderService {
 
