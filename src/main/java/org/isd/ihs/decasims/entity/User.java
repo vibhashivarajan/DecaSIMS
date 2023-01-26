@@ -8,7 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * The Class User.
+ * The Class User: User entity class is a simple java object where the bean represents
+ * an actual database table and each field represents the database column. The annotations and
+ * attributes indicates relationship, and other properties specific to each column. An User
+ * item is each user stored in deca sim system. Current we only have two users.
+ *
+ * ref: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
  */
 @Entity
 @Table(name = "users")
