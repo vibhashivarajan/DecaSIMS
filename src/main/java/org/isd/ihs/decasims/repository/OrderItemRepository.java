@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * The Interface OrderItemRepository:  java interface which represents an access to
- * database table of OrderItem (sprignboot jpa feature)
+ * database table of OrderItem (springboot jpa feature)
  */
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long>	{
 
