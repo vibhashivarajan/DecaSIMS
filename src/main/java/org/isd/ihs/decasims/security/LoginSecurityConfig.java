@@ -12,7 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * The Class LoginSecurityConfig.
+ * The Class LoginSecurityConfig: Class beloging to spring framework to load & authenticate user login.
+ * Each and every url access in this webapplicaton will be blocked unless the user is authenticated.
+ * We exclude access to h2 console url from such security checks as we should be able to interact with H2
+ * console
+ *
  */
 @Configuration
 @EnableWebSecurity
