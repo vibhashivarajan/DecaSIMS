@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 /**
  * The Class DecaSimsController: This is the main controller class which recieves the requests coming from the browser. 
  It serves an entrypoint for each API. This class has other dependances like inventory service, order service, and user
- service which it utilizes to exchange data.
+ service which it utilizes to exchange data. This class is instantiated and managed by the spring framework.
  */
 @Controller
 public class DecaSimsController {
@@ -54,7 +54,8 @@ public class DecaSimsController {
     private UserService userService;
 
     /**
-     * Instantiates a new deca sims controller.
+     * Instantiating a new deca sims controller; this is a constructor where its creating this object with inventory service, 
+     order service, and user service.
      *
      * @param inventoryService the inventory service
      * @param orderService the order service
@@ -79,7 +80,9 @@ public class DecaSimsController {
     }
 
     /**
-     * List inventory.
+     * List inventory: the controller method which queries all catallog items from the database table and sets the list of 
+     those catalog items to the model object. It returns the view name "inventory_user" (thymeleaf html template) which contains 
+     html and code to display whatever is put into the model object
      *
      * @param model the model
      * @param authentication the authentication
@@ -87,7 +90,7 @@ public class DecaSimsController {
      * @param request the request
      * @return the string
      */
-    // handler method to handle list students and return mode and view
+    //
     @GetMapping("/inventory")
     public String listInventory(Model model, Authentication authentication,
         HttpSession session, HttpServletRequest request) {
