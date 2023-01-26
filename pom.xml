@@ -1,7 +1,6 @@
-<!-- This is a maven build file for my DECA SIMS project. 
-Essentially I use this to include all third party dependencies the project needs-->
-
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is a maven build file for my DECA SIMS project. Essentially I use this to include all third party dependencies the project needs-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
