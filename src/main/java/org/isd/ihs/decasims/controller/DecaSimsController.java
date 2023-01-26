@@ -309,8 +309,8 @@ public class DecaSimsController {
     /**
      * Adds the to cart: We allow this method to e called by any logged in user. This controller method
      * gets called when the user is ready to checkout. At this point all the items he/se has added to cart
-     * is now available in the session. We fetch all tos catalog product id added to session by te user, 
-     * retrieve each and every catalog item beloing to those poduct ids and get price of each of the item, 
+     * is now available in the session. We fetch all the catalog product id added to session by the user, 
+     * retrieve each and every catalog item belonging to those poduct ids and get price of each of the item, 
      * while creating te total cost of all items in the cart (rounded). We also create a list of all catalog
      * items in the cart and set it model to display items in cart as well. We then call "place_order" page 
      * which will show the items of the users cart and total total along with place order link.
@@ -356,7 +356,15 @@ public class DecaSimsController {
 
 
     /**
-     * Place order.
+     * Place order: We allow this method to e called by any logged in user. This important controller method
+     * gets called when the user clicks the place order button. At this point we know all the items the user
+     * has added to the cart (from the session). We fetch all the catalog product id added to session by the user, 
+     * retrieve each and every catalog item belonging to those poduct. We then create List of OrderItem objecs
+     * setting all details of order items from the catalog item object, and also create an order object where each
+     * order object will contain mutiple order items within it. We just called our service to save the order items
+     * and both order and order items gets saved to the database. Once saved, we get the saved order and we set
+     * the detials of order (just placed) back to model so the page can display order number and also the email
+     * order is being sent to (actually, we do not send any emails yet nor have any code for it)
      *
      * @param model the model
      * @param authentication the authentication
@@ -403,7 +411,6 @@ public class DecaSimsController {
         model.addAttribute("savedOrder", savedOrder);
         model.addAttribute("userEmail", loggedInUser.getUserEmail());
 
-
         List < Order > allOrders = orderService.getAllOrders();
         model.addAttribute("allOrders", allOrders);
 
@@ -414,7 +421,10 @@ public class DecaSimsController {
 
 
     /**
-     * Checks if is admin role.
+     * Checks if is admin role: utility method to retrieve if the logged in user is an admin role 
+     * or not 
+     * ref: https://www.baeldung.com/spring-security-check-user-role 
+     *
      *
      * @param authentication the authentication
      * @return true, if is admin role
@@ -425,7 +435,7 @@ public class DecaSimsController {
     }
 
     /**
-     * Round value.
+     * Round value: utility method to round the $ amount to two decimal places
      *
      * @param totalPrice the total price
      * @return the double
