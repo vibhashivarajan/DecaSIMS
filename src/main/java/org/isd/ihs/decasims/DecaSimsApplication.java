@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * The Class DecaSimsApplication: Standard springboot application class wich acts as an entry point
- * for the applicaton to start. Optionally, we can create entried into all the database tables we 
+ * for the application to start. Optionally, we can create entries into all the database tables we 
  * have in our project as well.
  * 
  */
@@ -65,8 +65,6 @@ public class DecaSimsApplication implements CommandLineRunner{
 		*/
 	}
 }
-
-
 
 
 
