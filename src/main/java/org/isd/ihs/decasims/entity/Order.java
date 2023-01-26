@@ -17,7 +17,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
- * The Class Order.
+ * The Class Order: Order entity class is a simple java object where the object represents an actual
+ * database table and each field represents the actual database column. The annotations and attributes 
+ * indicates relationship, and other properties specific to each column. This class represents a 
+ * row in order table. It gets created as user place order for items in deca store. Note, each order
+ * can ave mutiple order items associated with it (one to many relatonship)
+ *
+ * ref: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
  */
 @Entity
 @Table(name = "orders")
