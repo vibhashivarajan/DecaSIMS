@@ -2,7 +2,6 @@
 //Advanced Java Topics DECA SIMS 
 
 package org.isd.ihs.decasims.controller;
-package org.isd.ihs.decasims.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -431,7 +430,7 @@ public class DecaSimsController {
      */
     private boolean isAdminRole(Authentication authentication) {
         return ((SimsUserDetails) authentication.getPrincipal()).getAuthorities().stream().anyMatch(
-            a - > a.getAuthority().equalsIgnoreCase("admin"));
+            a -> a.getAuthority().equalsIgnoreCase("admin"));
     }
 
     /**
