@@ -7,7 +7,7 @@ import org.isd.ihs.decasims.repository.CatalogItemRepository;
 import org.springframework.stereotype.Service;
 
 /**
- * The Class InventoryService: A inventory service class simply forward the requests received to
+ * The Class InventoryService: An inventory service class simply forward the requests received to
  * specific repository (in this case CatalogItemRepository). Not much going on here. @Service 
  * indicates spring managed bean.
  *
