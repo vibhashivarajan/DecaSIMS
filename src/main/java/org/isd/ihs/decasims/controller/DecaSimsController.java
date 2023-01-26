@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * The Class DecaSimsController: This is the main controller class which recieves the requests coming from the browser. 
- * It serves an entrypoint for each API action. This class has other dependances like inventory service, order service, and user
+ * The Class DecaSimsController: This is the main controller class which receives the requests coming from the browser. 
+ * It serves an entrypoint for each API action. This class has other dependences like inventory service, order service, and user
  * service which it utilizes to exchange data with database. This class is instantiated and managed by the spring framework.
  */
 @Controller
@@ -78,7 +78,7 @@ public class DecaSimsController {
     }
 
     /**
-     * List inventory: This controller method which queries all catallog items from the database table and sets the list of 
+     * List inventory: This controller method which queries all catalog items from the database table and sets the list of 
      * those catalog items to the model object. It returns the view name "inventory_user" (thymeleaf html template) which contains 
      * html and code to display whatever is put into the model object for us.
      *
@@ -140,9 +140,9 @@ public class DecaSimsController {
     /**
      * Save catalog item: First this method check of this user is admin, if not it redirects the user to
      * error page (as saving the catalog is admin only action). This controller method get called with the
-     * CatalogItem object passed to it from the earlier page. We then save the catalogue object to the database,
-     * calling/redirecting back to the inventory page (which will load all the items in the inventory including the
-     * new one we just saved)
+     * CatalogItem object passed to it from the earlier page. We then save the catalog object to the database,
+     * calling/redirecting back to the inventory page (which will load all the items in the inventory including
+     * the new one we just saved)
      *
      * @param catalogItem the catalog item
      * @param authentication the authentication
@@ -168,7 +168,7 @@ public class DecaSimsController {
     /**
      * Edits the catalog item form:  First this method check of this user is admin, if not it redirects the user to
      * error page (as fetching the catalog for edit is admin only action). This controller method gets called with
-     * the unique CatalogItem item id passed to it from the earlier page. We then query the catalogue database for
+     * the unique CatalogItem item id passed to it from the earlier page. We then query the catalog database for
      * the specific, catalog object product id returning the saved catalog item back to the html page. The page once
      * receives the item, it will display the catalog item form with pre-populated values (which method had just set)
      *
@@ -197,8 +197,8 @@ public class DecaSimsController {
     /**
      * Update catalog item: First this method check of this user is admin, if not it redirects the user to
      * error page (as updating the catalog is admin only action). This controller method gets called with the 
-     * updated CatalogItem item object passed to it from the earlier page. We then query the catalogue database
-     * for the specific catalog object by product id and we then proceeed updating every field of the catalog
+     * updated CatalogItem item object passed to it from the earlier page. We then query the catalog database
+     * for the specific catalog object by product id and we then proceed updating every field of the catalog
      * item object with the fields we received the user. We then proceed to save the updated catalog item to the
      * database. We then call/redirect back to the inventory page (which will load all the items in the inventory
      * including the new updates we just made to the specific catalog item. 
@@ -243,7 +243,7 @@ public class DecaSimsController {
     /**
      * Delete catalog item:  First this method check of this user is admin, if not it redirects the user to
      * error page (as deleting the catalog is admin only action). This controller method gets called with the 
-     * uniqeye CatalogItem item product id passed to it from the earlier page. We then directly update catalogue
+     * unique CatalogItem item product id passed to it from the earlier page. We then directly update catalog
      * database deleting specific catalog object. We then call/redirect back to the inventory page (which will
      * load all the items in the inventory excluding the just now deleted specific catalog item. 
      *
@@ -272,8 +272,8 @@ public class DecaSimsController {
      * Adds the to cart: We allow this method to e called by any logged in user. This controller method
      * gets called when the user tried to add an item to cart. The specific catalog product item id is 
      * passed into this method. We then query http session object (http session is like in-memory storage 
-     * space for every logged in user which will exists till the user logs outs). If we find any exisiting
-     * catalog item init, we update it with this newly added catalog item, or if not, we create a new list of
+     * space for every logged in user which will exists till the user logs outs). If we find any existing
+     * catalog item in it, we update it with this newly added catalog item, or if not, we create a new list of
      * catalog item, and save it the session and model as well. We then call/redirect back to the inventory
      * user page which will show the count of items in user cart and also show all items in the catalog.
      *
@@ -309,7 +309,7 @@ public class DecaSimsController {
      * Adds the to cart: We allow this method to e called by any logged in user. This controller method
      * gets called when the user is ready to checkout. At this point all the items he/se has added to cart
      * is now available in the session. We fetch all the catalog product id added to session by the user, 
-     * retrieve each and every catalog item belonging to those poduct ids and get price of each of the item, 
+     * retrieve each and every catalog item belonging to those product ids and get price of each of the item, 
      * while creating te total cost of all items in the cart (rounded). We also create a list of all catalog
      * items in the cart and set it model to display items in cart as well. We then call "place_order" page 
      * which will show the items of the users cart and total total along with place order link.
@@ -358,11 +358,11 @@ public class DecaSimsController {
      * Place order: We allow this method to e called by any logged in user. This important controller method
      * gets called when the user clicks the place order button. At this point we know all the items the user
      * has added to the cart (from the session). We fetch all the catalog product id added to session by the user, 
-     * retrieve each and every catalog item belonging to those poduct. We then create List of OrderItem objecs
+     * retrieve each and every catalog item belonging to those product. We then create List of OrderItem objects
      * setting all details of order items from the catalog item object, and also create an order object where each
-     * order object will contain mutiple order items within it. We just called our service to save the order items
+     * order object will contain multiple order items within it. We just called our service to save the order items
      * and both order and order items gets saved to the database. Once saved, we get the saved order and we set
-     * the detials of order (just placed) back to model so the page can display order number and also the email
+     * the details of order (just placed) back to model so the page can display order number and also the email
      * order is being sent to (actually, we do not send any emails yet nor have any code for it)
      *
      * @param model the model
@@ -422,8 +422,8 @@ public class DecaSimsController {
     /**
      * Checks if is admin role: utility method to retrieve if the logged in user is an admin role 
      * or not 
+     * 
      * ref: https://www.baeldung.com/spring-security-check-user-role 
-     *
      *
      * @param authentication the authentication
      * @return true, if is admin role
