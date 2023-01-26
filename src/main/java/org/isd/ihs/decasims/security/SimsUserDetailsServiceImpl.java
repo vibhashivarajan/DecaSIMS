@@ -8,7 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * The Class SimsUserDetailsServiceImpl.
+ * The Class SimsUserDetailsServiceImpl: class just loads a given user bu username from
+ * user database.
+ * 
  */
 public class SimsUserDetailsServiceImpl implements UserDetailsService {
 
@@ -34,6 +36,5 @@ public class SimsUserDetailsServiceImpl implements UserDetailsService {
 		return new SimsUserDetails(user);
 	}
 }
-
 
 
