@@ -13,10 +13,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
- * The Class CatalogItem: Entity class is a simple java object where the bean represents a actual
- * database table and each field is mapped to a database column. The annotations and attributes 
+ * The Class CatalogItem: CatalogItem entity class is a simple java object where the bean represents
+ * an actual database table and each field represents the database column. The annotations and attributes 
  * indicates relationship, and other properties specific to each column. An Catalog item is each
- * item in deca sims store.
+ * item in deca sims store catalog.
  *
  * ref: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
  */
