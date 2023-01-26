@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
  
 /**
  * The Interface UserRepository:  java interface which represents an access to
- * database table of Users (sprignboot jpa feature)
+ * database table of Users (springboot jpa feature)
  */
 public interface UserRepository extends JpaRepository<User, Long> {
  
