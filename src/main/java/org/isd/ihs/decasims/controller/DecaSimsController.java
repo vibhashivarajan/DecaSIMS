@@ -1,6 +1,7 @@
 //Vibha Shivarajan
-//Advanced Java Topics DECA SIMS package org.isd.ihs.decasims.controller;
+//Advanced Java Topics DECA SIMS 
 
+package org.isd.ihs.decasims.controller;
 package org.isd.ihs.decasims.controller;
 
 import java.math.BigDecimal;
@@ -30,7 +31,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * The Class DecaSimsController.
+ * The Class DecaSimsController: This is the main controller class which recieves the requests coming from the browser. 
+ It serves an entrypoint for each API. This class has other dependances like inventory service, order service, and user
+ service which it utilizes to exchange data.
  */
 @Controller
 public class DecaSimsController {
