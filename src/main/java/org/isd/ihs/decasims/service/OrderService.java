@@ -7,7 +7,12 @@ import org.isd.ihs.decasims.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 /**
- * The Class OrderService.
+ * The Class OrderService: An order service class simply forward the requests received to
+ * specific repository (in this case OrderRepository). Not much going on here. @Service 
+ * indicates spring managed bean.
+ *
+ */
+
  */
 @Service
 public class OrderService {
