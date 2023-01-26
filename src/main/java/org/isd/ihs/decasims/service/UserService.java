@@ -5,7 +5,9 @@ import org.isd.ihs.decasims.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 /**
- * The Class UserService.
+ * The Class UserService: An user service class simply forward the requests received to
+ * specific repository (in this case UserRepository). Not much going on here. @Service 
+ * indicates spring managed bean.
  */
 @Service
 public class UserService {
