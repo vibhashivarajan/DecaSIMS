@@ -21,7 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
  * database table and each field represents the actual database column. The annotations and attributes 
  * indicates relationship, and other properties specific to each column. This class represents a 
  * row in order table. It gets created as user place order for items in deca store. Note, each order
- * can ave mutiple order items associated with it (one to many relatonship)
+ * can have multiple order items associated with it (one to many relationship)
  *
  * ref: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
  */
@@ -209,7 +209,7 @@ public class Order {
 	}
 
 	/**
-	 * To string.
+	 * To string: returns string representation of this object
 	 *
 	 * @return the string
 	 */
