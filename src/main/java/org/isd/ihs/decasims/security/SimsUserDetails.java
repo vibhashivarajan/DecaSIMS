@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * The Class SimsUserDetails: Simple object represent the user detailsloaded from database
+ * The Class SimsUserDetails: Simple object represent the user details loaded from database
  * 
  */
 public class SimsUserDetails implements UserDetails {
