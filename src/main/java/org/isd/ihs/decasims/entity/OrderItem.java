@@ -23,8 +23,6 @@ import org.hibernate.annotations.UpdateTimestamp;
  *
  * ref: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
  */
-
- */
 @Entity
 @Table(name = "order_items")
 public class OrderItem {
