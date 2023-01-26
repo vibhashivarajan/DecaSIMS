@@ -16,7 +16,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
- * The Class OrderItem.
+ * The Class OrderItem: OrderItem entity class is a simple java object where the bean represents
+ * an actual database table and each field represents the database column. The annotations and attributes 
+ * indicates relationship, and other properties specific to each column. An OrderItem class is each
+ * item beloging to an order (aka items in cart). One of more order items can be related to same order.
+ *
+ * ref: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+ */
+
  */
 @Entity
 @Table(name = "order_items")
