@@ -1,9 +1,17 @@
 <div th:fragment="navbar-content">
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		<!-- Brand -->
-		<a class="navbar-brand" href="#">DECA Store Inventory Management
-			System <br> Logged-in as User:
-			[[${#httpServletRequest.remoteUser}]] !
+		<a class="navbar-brand ml-auto" style="margin-left: 10px;" href="#">
+			<ul style="list-style: none;">
+				<li class="nav-item"><h2 style="font-weight: 100;">
+						DECA <b>S</b>tore <b>I</b>nventory <b>M</b>anagement <b>S</b>ystem
+					</h2></li>
+				<li class="nav-item"><h4 style="font-weight: 100;">
+						Logged-in User: <b>[[${#httpServletRequest.remoteUser}]] </b> |
+						Role: <b><span
+							th:text="${isAdminUser} ? 'Administrator' : 'Normal User'" /></span></b>
+					</h4></li>
+			</ul>
 		</a>
 
 		<!-- Toggler/collapsibe Button -->
@@ -16,11 +24,12 @@
 		<div class="collapse navbar-collapse justify-content-end"
 			id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="btn btn-outline-light mr-2"
-					href="/manage_users">Manage Users</a></li>
-				<li class="nav-item ml-auto" style="margin-left: 10px;"></li>
-					
-				<li class="nav-item ml-auto">
+				<div th:if="${isAdminUser}">
+					<li class="nav-item"><a class="btn btn-outline-light mr-2"
+						href="/manage_users">Manage Users</a></li>
+					<li class="nav-item ml-auto" style="margin-left: 10px;"></li>
+				</div>
+				<li class="nav-item ml-auto" style="margin-left: 10px;">
 					<form class="form-inline" th:action="@{/logout}" method="post">
 						<button class="btn btn-outline-light" type="submit">Logout</button>
 					</form>

@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class DecaSimsController {
 
-	/** The logger: standard logger to log everything we need to log within the application */
+	/**  The logger: standard logger to log everything we need to log within the application. */
 	Logger logger = LoggerFactory.getLogger(DecaSimsController.class);
 
 	/** The Constant CART_SESSION. */
@@ -77,11 +77,16 @@ public class DecaSimsController {
 		return "redirect:/inventory";
 	}
 
-	@GetMapping("/z")
-	public String rootzRedirect() {
-		return "aa";
-	}
-	
+	/**
+	 * Login.
+	 *
+	 * @param model the model
+	 * @param errMsg the err msg
+	 * @param authentication the authentication
+	 * @param session the session
+	 * @param request the request
+	 * @return the string
+	 */
 	@GetMapping("/login")
 	public String login(Model model, String errMsg, Authentication authentication,
 			HttpSession session, HttpServletRequest request) {
@@ -97,7 +102,6 @@ public class DecaSimsController {
 
 		String loggedInUserName = (authentication != null) ? authentication.getName(): null;
 		boolean isAdminUser = isAdminRole(authentication);
-
 		logger.info("Inside method login(...) for user {}, isAdmin {}",
 				loggedInUserName, isAdminUser);
 
@@ -127,6 +131,7 @@ public class DecaSimsController {
 				loggedInUserName, isAdminUser);
 
 		model.addAttribute("catalogItems", inventoryService.getAllCatalogItems());
+		model.addAttribute("isAdminUser", isAdminUser);
 
 		// return different view template based on if logged-in user is admin or user
 		if (isAdminUser) {
@@ -155,12 +160,15 @@ public class DecaSimsController {
 				loggedInUserName, isAdminUser);
 
 		if (!isAdminUser) {
+			setAdminOnlyMessage(model);
 			return "error";
 		}
 
 		// create catalog object to hold catalog form data
 		CatalogItem catalogItem = new CatalogItem();
 		model.addAttribute("catalogItem", catalogItem);
+		model.addAttribute("isAdminUser", isAdminUser);
+
 		return "create_inventory";
 	}
 
@@ -172,12 +180,13 @@ public class DecaSimsController {
 	 * the new one we just saved)
 	 *
 	 * @param catalogItem the catalog item
+	 * @param model the model
 	 * @param authentication the authentication
 	 * @return the string
 	 */
 	@PostMapping("/inventory_admin")
 	public String saveCatalogItem(@ModelAttribute("catalogItem") CatalogItem catalogItem,
-			Authentication authentication) {
+			Model model, Authentication authentication) {
 
 		String loggedInUserName = authentication.getName();
 		boolean isAdminUser = isAdminRole(authentication);
@@ -185,6 +194,7 @@ public class DecaSimsController {
 				loggedInUserName, isAdminUser);
 
 		if (!isAdminUser) {
+			setAdminOnlyMessage(model);
 			return "error";
 		}
 
@@ -214,10 +224,13 @@ public class DecaSimsController {
 				loggedInUserName, isAdminUser);
 
 		if (!isAdminUser) {
+			setAdminOnlyMessage(model);
 			return "error";
 		}
 
 		model.addAttribute("catalogItem", inventoryService.getCatalogItemById(id));
+		model.addAttribute("isAdminUser", isAdminUser);
+
 		return "edit_inventory";
 	}
 
@@ -247,6 +260,7 @@ public class DecaSimsController {
 				loggedInUserName, isAdminUser);
 
 		if (!isAdminUser) {
+			setAdminOnlyMessage(model);
 			return "error";
 		}
 
@@ -275,11 +289,12 @@ public class DecaSimsController {
 	 * load all the items in the inventory excluding the just now deleted specific catalog item. 
 	 *
 	 * @param id the id
+	 * @param model the model
 	 * @param authentication the authentication
 	 * @return the string
 	 */
 	@GetMapping("/inventory_admin/{id}")
-	public String deleteCatalogItem(@PathVariable Long id,
+	public String deleteCatalogItem(@PathVariable Long id, Model model,
 			Authentication authentication) {
 
 		String loggedInUserName = authentication.getName();
@@ -288,6 +303,7 @@ public class DecaSimsController {
 				loggedInUserName, isAdminUser);
 
 		if (!isAdminUser) {
+			setAdminOnlyMessage(model);
 			return "error";
 		}
 
@@ -329,6 +345,8 @@ public class DecaSimsController {
 		model.addAttribute(CART_SESSION, cartItems);
 
 		model.addAttribute("catalogItems", inventoryService.getAllCatalogItems());
+		model.addAttribute("isAdminUser", isAdminUser);
+
 		return "inventory_user";
 	}
 
@@ -359,6 +377,7 @@ public class DecaSimsController {
 		List < Long > cartItemIds = (List < Long > ) session.getAttribute(CART_SESSION);
 
 		if (cartItemIds == null) { // if user just logged-in or new browser
+			setAdminOnlyMessage(model);
 			return "error";
 		}
 
@@ -376,6 +395,7 @@ public class DecaSimsController {
 
 		model.addAttribute("catalogItems", checkoutList);
 		model.addAttribute("totalPrice", roundValue(orderTotal));
+		model.addAttribute("isAdminUser", isAdminUser);
 
 		return "place_order";
 	}
@@ -439,6 +459,7 @@ public class DecaSimsController {
 
 		List < Order > allOrders = orderService.getAllOrders();
 		model.addAttribute("allOrders", allOrders);
+		model.addAttribute("isAdminUser", isAdminUser);
 
 		// clear the cart stored in session
 		session.setAttribute(CART_SESSION, null);
@@ -462,11 +483,11 @@ public class DecaSimsController {
 
 		return ((SimsUserDetails) authentication.getPrincipal())
 				.getAuthorities().stream().anyMatch(
-				a -> a.getAuthority().equalsIgnoreCase("admin"));
+						a -> a.getAuthority().equalsIgnoreCase("admin"));
 	}
 
 	/**
-	 * Round value: utility method to round the $ amount to two decimal places
+	 * Round value: utility method to round the $ amount to two decimal places.
 	 *
 	 * @param totalPrice the total price
 	 * @return the double
@@ -477,9 +498,16 @@ public class DecaSimsController {
 		return bd.doubleValue();
 	}
 
+	/**
+	 * Sets the admin only message.
+	 *
+	 * @param model the new admin only message
+	 */
 	private void setAdminOnlyMessage(Model model) {
 		model.addAttribute("errorMsg", 
 				"Only admin user can perform this action.");
 	}
-
 }
+
+
+

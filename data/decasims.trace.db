@@ -742,3 +742,9 @@ alter table users add constraint UK_g598si8fq653sjpg0a4fv8ec0 unique (isd_studen
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+2023-06-08 06:01:16 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM ORDERS ORDER_ITEMS ORDERS[*]"; SQL statement:
+SELECT * FROM ORDERS ORDER_ITEMS ORDERS [42000-200]
+2023-06-08 06:01:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "ORDERS[*]"; SQL statement:
+ORDERS [42000-200]
