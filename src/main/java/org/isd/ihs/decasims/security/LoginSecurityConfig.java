@@ -76,14 +76,19 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
 		http.authorizeRequests()
 		.anyRequest().authenticated()
-		.and()
-		.formLogin().permitAll()
-		.and()
-		.logout().permitAll();
+			.and()
+			.formLogin()
+				.loginPage("/login")
+				.defaultSuccessUrl("/", true)
+				.permitAll()
+			.and()
+		.logout()
+		.permitAll();
 	}
-
+	
 	/**
 	 * Configure.
 	 *
@@ -92,7 +97,12 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/h2-console/**", "/public/**");
+		web.ignoring().antMatchers(
+				"/h2-console/**",
+				"/images/**",
+				"/styles/**",
+				"/webjars/**"
+				);
 	}
 }
 

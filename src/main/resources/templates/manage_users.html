@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DECA Store Inventory Management System</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+	 integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+	  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="webjars/bootstrap/css/bootstrap.min.css" />
+<style>
+.form-group {
+	margin-bottom: 1.25rem;
+}
+</style>
+</head>
+<body>
+	<header th:insert="top-navigation-bar :: navbar-content"> </header>
+	<br>
+	<br>
+	<div class="container">	
+		<h2 class="mt-4">User Management</h2>
+        <div class="d-flex justify-content-end mb-3">
+            <a href="/register" class="btn btn-primary">Add New User</a>
+        </div>
+		<table class="table table-striped mt-4">
+			<thead>
+				<tr>
+					<th>User ID</th>
+					<th>ISD Student ID</th>
+					<th>User Email</th>
+					<th>Password</th>
+					<th>Account Status</th>
+					<th>Role</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.id}"></td>
+					<td th:text="${user.studentId}"></td>
+					<td th:text="${user.userEmail}"></td>
+					<td>&lt;Hidden&gt;</td>
+					<td>
+                        <input type="radio" th:value="true" checked>
+		                <label th:if="${user.enabled}" th:text="Enabled">Enabled</label>
+        		        <label th:unless="${user.enabled}" th:text="Disabled">Disabled</label>
+					</td>
+					<td th:text="${user.role}"></td>
+					<td><a th:href="@{'/user/' + ${user.id} + '/edit'}"
+						class="btn btn-primary btn-sm">Edit</a> <a
+						th:href="@{'/user/' + ${user.id} + '/delete'}"
+						class="btn btn-danger btn-sm">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Bootstrap JS (optional) -->
+	<script  type="text/javascript"
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

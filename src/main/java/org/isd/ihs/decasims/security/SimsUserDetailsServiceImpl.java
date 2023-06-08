@@ -26,12 +26,13 @@ public class SimsUserDetailsServiceImpl implements UserDetailsService {
 	 * @throws UsernameNotFoundException the username not found exception
 	 */
 	@Override
-	public UserDetails loadUserByUsername(String username)
+	public UserDetails loadUserByUsername(String userEmail)
 			throws UsernameNotFoundException {
-		User user = userService.getUserByUsername(username);
+		User user = userService.getUserByEmail(userEmail);
 
 		if (user == null) {
-			throw new UsernameNotFoundException("Could not find user");
+			throw new UsernameNotFoundException(
+					"Could not find user with email: " + userEmail);
 		}
 		return new SimsUserDetails(user);
 	}

@@ -22,15 +22,15 @@ public class User {
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id", updatable = false, nullable = false, unique = true)
+	@Column(name = "id", updatable = false, nullable = false, unique = true)
 	private Long id;
 
-	/** The username. */
-	@Column(name = "user_name", unique = true, nullable = false)
-	private String username;
+	/** The student id. */
+	@Column(name = "isd_student_id", nullable = false, unique = true)
+	private Long studentId;
 
 	/** The user email. */
-	@Column(name = "user_email", nullable = false)
+	@Column(name = "user_email", nullable = false, unique = true)
 	private String userEmail;
 
 	/** The password. */
@@ -62,23 +62,23 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	/**
-	 * Gets the username.
+	 * Gets the student id.
 	 *
-	 * @return the username
+	 * @return the student id
 	 */
-	public String getUsername() {
-		return username;
+	public Long getStudentId() {
+		return studentId;
 	}
 
 	/**
-	 * Sets the username.
+	 * Sets the student id.
 	 *
-	 * @param username the new username
+	 * @param studentId the new student id
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
 	}
 
 	/**
@@ -154,13 +154,13 @@ public class User {
 	}
 
 	/**
-	 * To string: returns string representation of this object
+	 * To string: returns string representation of this object.
 	 *
 	 * @return the string
 	 */
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", userEmail=" + userEmail
+		return "User [id=" + id + ", userEmail=" + userEmail
 				+ ", password=" + password + ", role=" + role + ", enabled=" + enabled + "]";
 	}
 }

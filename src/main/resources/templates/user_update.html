@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DECA Store Inventory Management System</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+	integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+	crossorigin="anonymous"></script>
+<style>
+.form-group {
+	margin-bottom: 1.25rem;
+}
+</style>
+</head>
+<body>
+	<header th:insert="top-navigation-bar :: navbar-content"> </header>
+	<br>
+	<br>
+	<div class="container">
+		<form action="#" th:action="@{/user/update}" th:object="${user}"
+			method="post">
+
+			<div th:if="*{id != null}" class="conditional-div">
+				<h2 class="mt-4">Update User Registration</h2>
+			</div>
+			<div th:if="*{id == null}" class="conditional-div">
+				<h2 class="mt-4">New User Registration</h2>
+			</div>
+
+			<div class="form-group">
+				<input type="hidden" th:field="*{id}" th:value="*{id}" /> <label
+					for="studentId">ISD Student ID:</label> <input type="text"
+					class="form-control" id="studentId" name="studentId"
+					th:field="*{studentId}" pattern="[0-9]+" required
+					placeholder="Please enter only numeric values." />
+			</div>
+			<div class="form-group">
+				<label for="email">User Email:</label> <input type="email"
+					class="form-control" id="userEmail" name="userEmail"
+					th:field="*{userEmail}"
+					pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required
+					placeholder="Please enter a valid email address." />
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label> <input type="password"
+					class="form-control" id="password" name="password"
+					th:field="*{password}"
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" required
+					placeholder="Please enter a password with at least 5 characters, including an uppercase letter, a lowercase letter, and a number." />
+			</div>
+			<div class="form-group">
+				<label>Account Status:</label>
+				<div class="form-check">
+					<input type="radio" class="form-check-input" checked
+						th:field="*{enabled}" th:value="true" /> <label
+						class="form-check-label" for="enabled">Enabled</label>
+				</div>
+				<div class="form-check">
+					<input type="radio" class="form-check-input" th:field="*{enabled}"
+						th:value="false" /> <label class="form-check-label"
+						for="disabled">Disabled</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="role">Role:</label> <select class="form-control"
+					id="role" name="role" required placeholder="Please select a role.">
+					<option value="">Select Role</option>
+					<option th:selected="*{#strings.toLowerCase(role) == 'user'}"
+						th:value="user">USER</option>
+					<option th:selected="*{#strings.toLowerCase(role) == 'admin'}"
+						th:value="admin">ADMIN</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Add</button>
+		</form>
+	</div>
+
+	<!-- Bootstrap JS (optional) -->
+	<script type="text/javascript"
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
