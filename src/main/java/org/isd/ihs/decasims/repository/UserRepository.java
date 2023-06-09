@@ -1,7 +1,5 @@
 package org.isd.ihs.decasims.repository;
 
-import java.util.List;
-
 import org.isd.ihs.decasims.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return the user by user email
      */
     @Query("SELECT u FROM User u WHERE u.userEmail = :userEmail")
-    User getUserByUserEmail(@Param("userEmail") String userEmail);
-        
-    //List<User> findAll();    
+    User getUserByUserEmail(@Param("userEmail") String userEmail);        
 }

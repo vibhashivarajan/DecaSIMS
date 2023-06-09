@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class UserActionController {
-	
+
 	/** The logger. */
 	Logger logger = LoggerFactory.getLogger(UserActionController.class);
 
@@ -55,10 +55,18 @@ public class UserActionController {
 	@GetMapping("/manage_users")
 	public String currentUsers(Model model, String errMsg, Authentication authentication,
 			HttpSession session, HttpServletRequest request) {
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /manage_users");
+		logger.info(">>>>>>>>>>>>>>>>>>>>>> /manage_users");
 
+		boolean isAdminUser = isAdminRole(authentication);
+		model.addAttribute("isAdminUser", isAdminUser);
+
+		if (!isAdminUser) {
+			setAdminOnlyMessage(model);
+			return "error";
+		}
 
 		model.addAttribute("users", userService.getAllRegisteredUsers());
+
 		return "manage_users";
 	}
 
@@ -77,9 +85,13 @@ public class UserActionController {
 			HttpSession session, HttpServletRequest request) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /register");
 
+		boolean isAdminUser = isAdminRole(authentication);
+		model.addAttribute("isAdminUser", isAdminUser);
+
 		// create new User object to hold user form data
 		User user = new User();
 		model.addAttribute("user", user);
+
 		return "user_update";
 	}
 
@@ -95,10 +107,10 @@ public class UserActionController {
 	public String updateUser(@ModelAttribute("user") User user, Model model, 
 			Authentication authentication) {
 
-		System.out.println("@@@@@@@@@@@@@@@@@@: " + user);
-
 		String loggedInUserName = authentication.getName();
 		boolean isAdminUser = isAdminRole(authentication);
+		model.addAttribute("isAdminUser", isAdminUser);
+
 		logger.info("Inside method updateUser(...) for user {}, isAdmin {}",
 				loggedInUserName, isAdminUser);
 
@@ -132,6 +144,8 @@ public class UserActionController {
 
 		String loggedInUserName = authentication.getName();
 		boolean isAdminUser = isAdminRole(authentication);
+		model.addAttribute("isAdminUser", isAdminUser);
+
 		logger.info("Inside method deleteUser(...) for user {}, isAdmin {}",
 				loggedInUserName, isAdminUser);
 
@@ -143,7 +157,7 @@ public class UserActionController {
 		userService.deleteUser(id);
 		return "redirect:/manage_users";
 	}
-	
+
 	/**
 	 * Edits the user.
 	 *
@@ -160,17 +174,18 @@ public class UserActionController {
 		boolean isAdminUser = isAdminRole(authentication);
 		logger.info("Inside method editUser(...) for user {}, isAdmin {}",
 				loggedInUserName, isAdminUser);
+		model.addAttribute("isAdminUser", isAdminUser);
 
 		if (!isAdminUser) {
 			setAdminOnlyMessage(model);
 			return "error";
 		}
 
-		User user = userService.getUserById(id);
+		User user = userService.getUserById(id);		
 		model.addAttribute("user", user);
 		return "user_update";
 	}
-	
+
 
 
 	/**

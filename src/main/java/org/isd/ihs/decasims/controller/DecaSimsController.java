@@ -99,7 +99,6 @@ public class DecaSimsController {
 			model.addAttribute("msg", "You have been logged out successfully.");
 		}
 
-
 		String loggedInUserName = (authentication != null) ? authentication.getName(): null;
 		boolean isAdminUser = isAdminRole(authentication);
 		logger.info("Inside method login(...) for user {}, isAdmin {}",
@@ -344,7 +343,11 @@ public class DecaSimsController {
 		session.setAttribute(CART_SESSION, cartItems);
 		model.addAttribute(CART_SESSION, cartItems);
 
-		model.addAttribute("catalogItems", inventoryService.getAllCatalogItems());
+		List<CatalogItem> catlogItems = inventoryService.getAllCatalogItems();
+		
+		// tbd:
+		// make sure number of items added is < qty in hand (else can't fulfill)		
+		model.addAttribute("catalogItems", catlogItems);
 		model.addAttribute("isAdminUser", isAdminUser);
 
 		return "inventory_user";
