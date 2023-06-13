@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * The Class SimsUserDetails: Simple object represent the user details loaded from database
+ * We load user by their email adddress which has to be unique in user database table
  * 
  */
 public class SimsUserDetails implements UserDetails {

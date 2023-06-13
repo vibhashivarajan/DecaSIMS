@@ -21,19 +21,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * The Class UserActionController.
+ * The Class UserActionController: This is the main controller class which receives the requests coming from the browser. 
+ * It serves an entrypoint for each API action related to the user (creation, edit and deletes). This class uses 
+ * user service to exchange data with database. This class is instantiated and managed by the spring framework.
  */
 @Controller
 public class UserActionController {
 
-	/** The logger. */
+	/**  The logger: standard logger to log everything we need to log within the application. */
 	Logger logger = LoggerFactory.getLogger(UserActionController.class);
 
 	/** The user service. */
 	private UserService userService;
 
 	/**
-	 * Instantiates a new user action controller.
+	 * Instantiates a new user action controller: In this constructor we set order service,
+	 *  and user service.
 	 *
 	 * @param userService the user service
 	 */
@@ -43,7 +46,7 @@ public class UserActionController {
 	}
 
 	/**
-	 * Current users.
+	 * Current users: this returns all users of the system (user and admin role)
 	 *
 	 * @param model the model
 	 * @param errMsg the err msg
@@ -71,7 +74,7 @@ public class UserActionController {
 	}
 
 	/**
-	 * Register.
+	 * Register : This endpoint is used to register new user with blank form (accesible only to admin)
 	 *
 	 * @param model the model
 	 * @param errMsg the err msg
@@ -96,7 +99,7 @@ public class UserActionController {
 	}
 
 	/**
-	 * Update user.
+	 * Update user: api to add or update user from html form and save it to database.
 	 *
 	 * @param user the user
 	 * @param model the model
@@ -131,7 +134,7 @@ public class UserActionController {
 	}
 
 	/**
-	 * Delete user.
+	 * Delete user: delete a user in database by id (main column in user table)
 	 *
 	 * @param id the id
 	 * @param model the model
@@ -159,7 +162,8 @@ public class UserActionController {
 	}
 
 	/**
-	 * Edits the user.
+	 * Edits the user: api called when edit user is clicked. This retrieve given user from database
+	 * and populated edit form 
 	 *
 	 * @param id the id
 	 * @param model the model
@@ -208,7 +212,7 @@ public class UserActionController {
 	}
 
 	/**
-	 * Sets the admin only message.
+	 * Sets the admin only message: just set some canned message to model before returning the flow to page
 	 *
 	 * @param model the new admin only message
 	 */
